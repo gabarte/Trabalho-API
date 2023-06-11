@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Purse</title>
+    <link rel="stylesheet" href="STYLE.CSS">
+    <style>
+        :root{
+            --color-white: #fff;
+            --color-dark1: rgb(206, 255, 220);
+            --color-dark2: #95f3ab;
+            --color-dark3: #06c613;
+            --color-dark4: #068319;
+            --color-dark5: #ffffff;
+            --color-purple: #000000;
+        }
+        *{
+        margin: 0;
+        padding: 0; 
+        }  
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--color-dark1);
+            color: var(--color-white);
+        }     
+        .img_logo_header {
+            height: 50px;
+        }  
+        .header,
+        .navigation_header{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            
+        }            
+        .header{
+            background-color: var(--color-dark2);
+            box-shadow: 1px 1px 4px var(--color-dark4);
+            height: 5.5em;
+            justify-content: space-between;
+            padding: 0 10%;
+        }
+        .navigation_header{
+            gap: 3em;
+            z-index: 2;
+        }
+        .navigation_header a{
+            text-decoration: none;
+            color: var(--color-purple);
+            transition: 1s;
+            font-weight: bold;
+        }
+        .active{
+            background-color: var(--color-dark3);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .content{
+            text-align: center;
+            padding-top: 5em;
+            height: 100vh;
+            transition: 1s;
+        }
+        .btn_icon_header{
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--color-white);
+            cursor: pointer;
+        }
+        .barraPesquisa{
+            background-color: #fff;
+            border: 2.5px solid #076b1c;
+            border-radius: 20px;
+            max-width: 300px;
+            min-width: 200px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            text-decoration: #fff;
+        }
+        .pesquisa {
+            background-color: transparent;
+            border: transparent;
+            width: 260px;
+            height: 30px;
+        }
+        .botao{
+            background-color: transparent;
+            border: transparent;
+            width: 30px;
+            height: 30px;
+            border-radius: 20px;
+            text-align: justify;
+            text-decoration: #fff;
+        }
+        @media screen and (max-width: 820px){
+            .pesquisa{
+                position: flex;
+                max-width: 200px;
+            }
+            .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-item {
+    grid-column: span 1;
+  }
+  .produto img {
+    width: 230px;
+        }
+        .filter {
+    max-width: 450px;
+    }  
+    .slide {
+        display: none;
+    }
+     }
+   
+
+  @media (min-width: 821px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-item {
+    grid-column: 1 / span 3;
+    height: 0;
+  }
+}
+@media (max-width: 520px) {
+  .grid-container {
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 10%;
+}
+  .filter {
+    max-width: 400px;
+    }
+  }
+  @media (max-width: 1300px) {
+    .filter {
+    width: 500px;
+    float: none;
+    margin-bottom: 20px;
+    }
+    .container {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 820px;
+  }
+
+  .filter {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .slide {
+    width: 100%;
+  }
+  }
+
+        @media screen and (max-width: 768px) {
+            .btn_icon_header{
+                display: block;
+            }
+            .navigation_header{
+                position: absolute;
+                flex-direction: column !important;
+                top: 0;
+                background-color: var(--color-dark5);
+                height: 100%;
+                width: 35vw;
+                padding: 1em;
+                animation-duration: 1s;
+                margin-left: -100vw;
+            }
+        }
+        @keyframes showSidebar {
+            from {margin-left: -100vw;}
+            top {margin-left: -10vw;}
+        }
+    </style>
+<body>
+    <div class="header" id="header">
+        <button onclick="toogleSidebar()" class="btn_icon_header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>                
+        </button>
+        <div class="logo_header">
+            <img src="imagens/LOGO.png" class="img_logo_header" alt="Logo GZ">
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Pesquisar produtos">
+            <button id="search-button">Pesquisar</button>
+          </div>
+        <div class="navigation_header" id="navigation_header">
+            <button onclick="toogleSidebar()" class="btn_icon_header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+            <a href="INDEX.HTML">Home</a>
+            <a href="#" class="active">Produtos</a>
+            <a href="#">Login</a>
+            <a href="#">Registrar</a>
+        </div>
+    </div>
+    <div container-detalhes>
+        <div id="detalhes-container">
+            <h1 id="produto-title"></h1>
+            <img id="produto-image" src="" alt="">
+            <p>Preço: <span id="produto-price"></span></p>
+            <p id="produto-description"></p>
+            <p>Marca: <span id="produto-brand"></span></p>
+            <p>Estação: <span id="produto-season"></span></p>
+            <p>Uso: <span id="produto-usage"></span></p>
+            <p>Gênero: <span id="produto-gender"></span></p>
+            <p>Número do Artigo: <span id="produto-article-number"></span></p>
+            <p>Cor Base: <span id="produto-base-color"></span></p>
+            <p>Ano: <span id="produto-year"></span></p>
+            <p>Tipo de Artigo: <span id="produto-article-type"></span></p>
+            <p>Categorias de Exibição: <span id="produto-display-categories"></span></p>
+            <p>Categoria: <span id="produto-category"></span></p>
+            <p>Avaliação: <span id="produto-rating-rate"></span> / 5 (Baseado em <span id="produto-rating-count"></span> avaliações)</p>
+        </div>
+    </div>
+
+<script>
+ // CABEÇALHO //
+ var header = document.getElementById('header');
+    var navigationHeader = document.getElementById('navigation_header');
+    var content = document.getElementById('content');
+    var showSidebar = false;
+
+    function toogleSidebar()
+    {
+        showSidebar = !showSidebar;
+        if (showSidebar)
+        {
+            navigationHeader.style.marginLeft = '-10vw'
+            navigationHeader.style.animationName = 'showSidebar'
+            content.style.filter = 'blur(2px)';
+        }
+        else
+        {
+            navigationHeader.style.marginLeft = '-100vw' 
+            navigationHeader.style.animationName = ''
+            content.style.filter = '';
+        }
+    }
+    function closeSidebar()
+    {
+        if (showSidebar)
+        {
+            toogleSidebar();
+        }
+    }
+    window.addEventListener('resize', function(event) {
+        if (window.innerWidth > 768 && showSidebar)
+        {
+            toogleSidebar();
+        }
+    })
+
+
+    //api
+    const urlParams = new URLSearchParams(window.location.search);
+const produtoId = urlParams.get('id');
+const url = `https://diwserver.vps.webdock.cloud/products/${produtoId}`;
+
+fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        const produto = data;
+        
+        document.getElementById("produto-title").textContent = produto.title;
+        document.getElementById("produto-image").src = produto.image;
+        document.getElementById("produto-price").textContent = `$${produto.price}`;
+        document.getElementById("produto-description").innerHTML = produto.description;
+        document.getElementById("produto-brand").textContent = produto.brandName;
+        document.getElementById("produto-season").textContent = produto.season;
+        document.getElementById("produto-usage").textContent = produto.usage;
+        document.getElementById("produto-gender").textContent = produto.gender;
+        document.getElementById("produto-article-number").textContent = produto.articleNumber;
+        document.getElementById("produto-base-color").textContent = produto.baseColour;
+        document.getElementById("produto-year").textContent = produto.year;
+        document.getElementById("produto-article-type").textContent = produto.articleType;
+        document.getElementById("produto-display-categories").textContent = produto.displayCategories;
+        document.getElementById("produto-category").textContent = produto.category;
+        document.getElementById("produto-rating-rate").textContent = produto.rating.rate;
+        document.getElementById("produto-rating-count").textContent = produto.rating.count;
+    })
+    .catch(error => {
+        console.log("Erro ao buscar os detalhes do produto:", error);
+    });
+</script>
+</body>
+</head>
+</html>
